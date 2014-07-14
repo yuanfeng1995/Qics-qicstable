@@ -46,7 +46,7 @@ int main(int argc, char **argv)
     table->cellRef(2,7).setReadOnly(true);
     table->cellRef(2,7).setLabel(QObject::tr(
         "There are several tables\n"
-        "with dirrefent selection modes,\n"
+        "with different selection modes,\n"
         "active headers, labels,\n"
         "colors and dimensions.\n"
         "\n"
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
         "The level of nested tables\n"
         "is unlimited.\n"
         "\n"
-        "Each table's attributes could be\n"
+        "Each table's attributes can be\n"
         "configured individually.\n"));
 
     // create inner table 1
