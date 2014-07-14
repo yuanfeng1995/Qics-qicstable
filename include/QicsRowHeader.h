@@ -23,7 +23,7 @@ class QicsTable;
 *  \nosubgrouping
 *  \brief The row header object for the table
 *
-* QicsRowHeader is the the programmer's interface to the header object that
+* QicsRowHeader is the programmer's interface to the header object that
 * appears at the top and/or bottom of each row in the QicsTable widget.
 * All attributes of individual cells can be set using this class.
 *
@@ -101,25 +101,25 @@ public:
 
     /*!
     * Sets the default row height for row header to \a height pixels
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultRowHeightInPixels(int height);
 
     /*!
     * Sets the default row height for row header to \a height character units (i.e. lines)
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultRowHeightInChars(int height);
 
     /*!
     * Sets the default column width for row header to \a width pixels
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultColumnWidthInPixels(int width);
 
     /*!
     * Sets the default column width for row header to \a width character units
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultColumnWidthInChars(int width);
 

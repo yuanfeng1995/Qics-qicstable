@@ -139,13 +139,13 @@ public:
 
 public slots:
     /*!
-    * Sets the the starting column index of this object to \a idx.
+    * Sets the starting column index of this object to \a idx.
     * \sa startColumnIndex()
     */
     inline void setStartColumnIndex(int idx) { myStartColumn = idx; }
 
     /*!
-    * Sets the the column interval of this object to \a interval.
+    * Sets the column interval of this object to \a interval.
     * \sa interval()
     */
     inline void setInterval(int interval) { myInterval = interval; }

@@ -238,7 +238,7 @@ public:
         bool override = true);
 
     /*! \internal
-    * Sets the the style property \a name for
+    * Sets the style property \a name for
     * repeating rows starting at \a row and repeating every \a interval
     * rows.
     */
@@ -247,7 +247,7 @@ public:
         const void *val);
 
     /*! \internal
-    * Sets the the style property \a name for
+    * Sets the style property \a name for
     * repeating columns starting at \a col and repeating every \a interval
     * columns.
     */
@@ -276,7 +276,7 @@ public:
         QicsCellStyle::QicsCellStyleProperty name);
 
     /*! \internal
-    * Clears the the style property \a name for
+    * Clears the style property \a name for
     * repeating rows starting at \a row and repeating every \a interval
     * rows.
     */
@@ -284,7 +284,7 @@ public:
         QicsCellStyle::QicsCellStyleProperty name);
 
     /*! \internal
-    * Clears the the style property \a name for
+    * Clears the style property \a name for
     * repeating columns starting at \a col and repeating every \a interval
     * columns.
     */

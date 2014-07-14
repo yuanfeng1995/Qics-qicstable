@@ -287,7 +287,7 @@ public:
 
 public slots:
     /*!
-    * Sets the the row index of this object to \a idx.
+    * Sets the row index of this object to \a idx.
     *  See the \link #rowIndex "rowIndex" \endlink
     *  property for details.
     * \sa rowIndex()

@@ -221,7 +221,7 @@ public:
         int height);
 
     /*!
-    * Sets the default row height to \a height for the the entire table.
+    * Sets the default row height to \a height for the entire table.
     */
     void setDefaultRowHeightInPixels(int height);
 
@@ -237,7 +237,7 @@ public:
     };
     /*!
     * Sets the default row height to \a height character units (i.e. lines)
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultRowHeightInChars(int height);
 
@@ -281,7 +281,7 @@ public:
         int width);
 
     /*!
-    * Sets the default column width to \a width for the the entire table.
+    * Sets the default column width to \a width for the entire table.
     */
     void setDefaultColumnWidthInPixels(int width);
 
@@ -298,7 +298,7 @@ public:
 
     /*!
     * Sets the default column width to \a width character units
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultColumnWidthInChars(int width);
 

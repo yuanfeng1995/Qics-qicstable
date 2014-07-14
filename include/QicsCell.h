@@ -427,7 +427,7 @@ public:
 
 public slots:
     /*!
-    * Sets the the row index of this object to \a idx.
+    * Sets the row index of this object to \a idx.
     *  See the \link #rowIndex "rowIndex" \endlink
     *  property for details.
     * \sa rowIndex()
@@ -435,7 +435,7 @@ public slots:
     void setRowIndex(int idx);
 
     /*!
-    * Sets the the column index of this object to \a idx.
+    * Sets the column index of this object to \a idx.
     *  See the \link #columnIndex "columnIndex" \endlink
     *  property for details.
     * \sa columnIndex()

@@ -4394,28 +4394,28 @@ public slots:
 
     /*!
     * Sets the default row height to \a height pixels
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultRowHeightInPixels(int height);
 
     /*!
-    * Returns default \a height (in pixels) for the the entire table.
+    * Returns default \a height (in pixels) for the entire table.
     */
     inline int defaultRowHeightInPixels() const { return gridInfo().dimensionManager()->defaultRowHeightInPixels(); }
 
     /*!
     * Sets the default row height to \a height character units (i.e. lines)
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultRowHeightInChars(int height);
     /*!
-    * Returns default \a height (in character unit) for the the entire table.
+    * Returns default \a height (in character unit) for the entire table.
     */
     inline int defaultRowHeightInChars() const { return dimensionManager()->defaultRowHeightInChars(); }
 
     /*!
     * Sets the default column width to \a width pixels
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultColumnWidthInPixels(int width);
     /*!
@@ -4425,7 +4425,7 @@ public slots:
 
     /*!
     * Sets the default column width to \a width character units
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultColumnWidthInChars(int width);
     /*!

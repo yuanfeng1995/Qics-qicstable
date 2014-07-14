@@ -25,7 +25,7 @@ class QicsTable;
 *  \nosubgrouping
 * \brief Flyweight class representing the main grid of the table
 *
-* QicsMainGrid is the the programmer's interface to the main grid that
+* QicsMainGrid is the programmer's interface to the main grid that
 * appears in the QicsTable widget.
 * This class is used to query or set attributes of all the cells in the
 * main grid area of the table.

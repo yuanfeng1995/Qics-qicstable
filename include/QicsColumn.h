@@ -287,7 +287,7 @@ public:
 
 public slots:
     /*!
-    * Sets the the column index of this object to \a idx.
+    * Sets the column index of this object to \a idx.
     *  See the \link #columnIndex "columnIndex" \endlink
     *  property for details.
     * \sa columnIndex()

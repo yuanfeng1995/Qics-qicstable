@@ -743,23 +743,23 @@ public slots:
 
     /*!
     * Sets the default row height to \a height pixels
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultRowHeightInPixels(int height);
     /*!
     * Sets the default row height to \a height character units (i.e. lines)
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultRowHeightInChars(int height);
 
     /*!
     * Sets the default column width to \a width pixels
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultColumnWidthInPixels(int width);
     /*!
     * Sets the default column width to \a width character units
-    * for the the entire table.
+    * for the entire table.
     */
     void setDefaultColumnWidthInChars(int width);
 
