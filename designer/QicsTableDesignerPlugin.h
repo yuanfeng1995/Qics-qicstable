@@ -1,6 +1,6 @@
 /*********************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2016 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of the QicsTable software.
@@ -13,7 +13,12 @@
 #ifndef QICSTABLEDESIGNERPLUGIN_H
 #define QICSTABLEDESIGNERPLUGIN_H
 
+#include <QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
+#else
 #include <QDesignerCustomWidgetInterface>
+#endif
 #include <QtCore/qplugin.h>
 #include <QIcon>
 
