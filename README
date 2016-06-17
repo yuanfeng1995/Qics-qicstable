@@ -11,7 +11,7 @@ QicsTable requires Qt version 4.7.0 or newer.
 
 The code has also been ported to Qt 5, but has not been fully tested.
 The code and all of the demos and examples are known to build and run
-under Ubuntu Linux and Qt versions up to and including Qt 5.6.0.
+under Ubuntu Linux and Qt versions up to and including Qt 5.7.0.
 
 This software can be used under any of the following licenses, at your choice:
 
