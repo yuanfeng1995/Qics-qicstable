@@ -1207,8 +1207,8 @@ void QicsDimensionManager::setCellFont(QicsGridType grid_type,
                 }
             }
         }
-        if (new_font_width != new_font_width)
-            new_font_width = new_font_width + 10;
+        /* if (new_font_width != new_font_width)
+          new_font_width = new_font_width + 10; */
 
         setColumnWidthInPixels(col,visual_coords,new_font_width);
 

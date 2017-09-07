@@ -2834,27 +2834,27 @@ void  QicsScreenGrid::timerScrollingEvent()
             ss = speedOfScroll = qMax(ss, speedOfScroll);
         }
 
-        if (m_scrollDirec & Qics::ScrollLeft) {
-            if (col - speedOfScroll < real_vp.startColumn()) {   // if step more than count columns to left
-                speedOfScroll = col - real_vp.startColumn();
+    if (m_scrollDirec & Qics::ScrollLeft) {
+        if (col - speedOfScroll < real_vp.startColumn()) {   // if step more than count columns to left
+            speedOfScroll = col - real_vp.startColumn();
+        }
+        if (speedOfScroll) {
+            scrollLeft(speedOfScroll);
+            cellToScroll.setColumn(col - speedOfScroll);
+        }
+        ss = speedOfScroll = qMax(ss, speedOfScroll);
+    }
+    else
+        if (m_scrollDirec & Qics::ScrollRight) {
+            if (col + speedOfScroll > real_vp.endColumn()) {     // if step more than count columns to right
+                speedOfScroll = real_vp.endColumn() - col;
             }
             if (speedOfScroll) {
-                scrollLeft(speedOfScroll);
-                cellToScroll.setColumn(col - speedOfScroll);
+                scrollRight(speedOfScroll);
+                cellToScroll.setColumn(col + speedOfScroll);
             }
             ss = speedOfScroll = qMax(ss, speedOfScroll);
         }
-        else
-            if (m_scrollDirec & Qics::ScrollRight) {
-                if (col + speedOfScroll > real_vp.endColumn()) {     // if step more than count columns to right
-                    speedOfScroll = real_vp.endColumn() - col;
-                }
-                if (speedOfScroll) {
-                    scrollRight(speedOfScroll);
-                    cellToScroll.setColumn(col + speedOfScroll);
-                }
-                ss = speedOfScroll = qMax(ss, speedOfScroll);
-            }
 
     doScrollTraverse();
 }

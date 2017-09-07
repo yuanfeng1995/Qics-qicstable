@@ -236,7 +236,7 @@ void QicsTreeTable::removeSpecialRows()
                 (*it)->dispose(rowRef(it.key()));
             }
 
-            dm->removeSpecialRows();
+        dm->removeSpecialRows();
     }
 }
 
@@ -781,9 +781,9 @@ void QicsTreeTable::onColumnsRemoved(int count, int index)
             else
                 tmpf[it.key()] = *it;
 
-            // regroup
-            m_filters = tmpf;
-            groupColumns(tmpg);
+        // regroup
+        m_filters = tmpf;
+        groupColumns(tmpg);
     }
 
     repaint();
@@ -915,25 +915,25 @@ void QicsTreeTable::doFilterTable()
         }
 
 
-        // hide all filtered rows
-        bool old_sig = dimensionManager()->emitSignals();
+    // hide all filtered rows
+    bool old_sig = dimensionManager()->emitSignals();
 
-        for (int i = 0; i < m_filteredRows.size(); ++i)
-            rowRef(gridInfo().visualRowIndex(m_filteredRows.at(i))).hide();
+    for (int i = 0; i < m_filteredRows.size(); ++i)
+        rowRef(gridInfo().visualRowIndex(m_filteredRows.at(i))).hide();
 
-        dimensionManager()->setEmitSignals(old_sig);
+    dimensionManager()->setEmitSignals(old_sig);
 
-        // restore tree state - reexpand top level items
-        const QMap<QString, QList<int> > data = m_groupData.value(m_groups.value(0)).content;//#90025
-        for (it = data.constBegin(); it != data.constEnd(); ++it) {
-            // get list of special rows
-            lr = it.value();
-            for (int j = 0; j < lr.size(); ++j) {
-                QicsExpandableStaticRowData *erow = qobject_cast<QicsExpandableStaticRowData*>(specialRowData(lr.value(j)));
-                if (erow)
-                    erow->doExpand(erow->m_open, true, false);
-            }
+    // restore tree state - reexpand top level items
+    const QMap<QString, QList<int> > data = m_groupData.value(m_groups.value(0)).content;//#90025
+    for (it = data.constBegin(); it != data.constEnd(); ++it) {
+        // get list of special rows
+        lr = it.value();
+        for (int j = 0; j < lr.size(); ++j) {
+            QicsExpandableStaticRowData *erow = qobject_cast<QicsExpandableStaticRowData*>(specialRowData(lr.value(j)));
+            if (erow)
+                erow->doExpand(erow->m_open, true, false);
         }
+    }
 }
 
 bool QicsTreeTable::doFilterRowCheck(QicsExpandableStaticRowData *erow)

@@ -264,7 +264,7 @@ void QicsRowFilter::handleColumnsRemoved(int num, int start_position)
             } else
                 temp.insert(it.key(), *it);
 
-            if (b) m_filters = temp;
+        if (b) m_filters = temp;
     }
 }
 

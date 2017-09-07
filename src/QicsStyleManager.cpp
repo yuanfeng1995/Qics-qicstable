@@ -110,7 +110,7 @@ void QicsStyleManager::deleteCellStyleVectors(QicsCellStylePVPV &vcols)
             deleteCellStyles(*(vcols.at(c)));
             delete vcols.at(c);
         }
-        vcols.clear();
+    vcols.clear();
 }
 
 void QicsStyleManager::deleteCellStyles(QicsCellStylePV &csv)

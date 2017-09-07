@@ -635,49 +635,49 @@ void QicsTable::handleWideKeyPressed(QKeyEvent *event)
     switch (event->key())
     {
     case Qt::Key_Delete: {
-            if (isWideKeyAction(Del_DeleteSelected)) {
-                deleteSelected();
+        if (isWideKeyAction(Del_DeleteSelected)) {
+            deleteSelected();
+            event->accept();
+            return;
+        }
+        break;
+    }
+    case Qt::Key_A: {
+        if (event->modifiers() == Qt::ControlModifier)
+            if (isWideKeyAction(CtrlA_SelectAll)) {
+                selectAll();
                 event->accept();
                 return;
             }
-            break;
-        }
-    case Qt::Key_A: {
-            if (event->modifiers() == Qt::ControlModifier)
-                if (isWideKeyAction(CtrlA_SelectAll)) {
-                    selectAll();
-                    event->accept();
-                    return;
-                }
-                break;
-        }
+        break;
+    }
     case Qt::Key_C: {
-            if (event->modifiers() == Qt::ControlModifier)
-                if (isWideKeyAction(CtrlC_Copy)) {
-                    copy();
-                    event->accept();
-                    return;
-                }
-                break;
-        }
+        if (event->modifiers() == Qt::ControlModifier)
+            if (isWideKeyAction(CtrlC_Copy)) {
+                copy();
+                event->accept();
+                return;
+            }
+        break;
+    }
     case Qt::Key_X: {
-            if (event->modifiers() == Qt::ControlModifier)
-                if (isWideKeyAction(CtrlX_Cut)) {
-                    cut();
-                    event->accept();
-                    return;
-                }
-                break;
-        }
+        if (event->modifiers() == Qt::ControlModifier)
+            if (isWideKeyAction(CtrlX_Cut)) {
+                cut();
+                event->accept();
+                return;
+            }
+        break;
+    }
     case Qt::Key_V: {
-            if (event->modifiers() == Qt::ControlModifier)
-                if (isWideKeyAction(CtrlV_Paste)) {
-                    paste();
-                    event->accept();
-                    return;
-                }
-                break;
-        }
+        if (event->modifiers() == Qt::ControlModifier)
+            if (isWideKeyAction(CtrlV_Paste)) {
+                paste();
+                event->accept();
+                return;
+            }
+        break;
+    }
     default:
         break;
     }

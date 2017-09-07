@@ -425,9 +425,9 @@ bool QicsCell::isHidden() const
                 for (int j = reg.startColumn(); j <= reg.endColumn(); ++j)
                     if (!mdm->isColumnHidden(j))
                         return false;
-                    break;
+                break;
             }
-            return true;
+        return true;
     }
 
     const QicsDimensionManager *dm = m_info->dimensionManager();

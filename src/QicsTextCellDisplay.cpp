@@ -360,14 +360,14 @@ void QicsTextCellDisplay::endEdit(QicsScreenGrid *grid, int row, int col)
                         QicsDataFloat _data(cap.toFloat());
                         myCell->setDataValue(_data);
                     }
-                    if (cap.toInt() != 0) {
-                        QicsDataInt _data(cap.toInt());
-                        myCell->setDataValue(_data);
-                    }
-                    if (cap == "0") {
-                        QicsDataInt _data(0);
-                        myCell->setDataValue(_data);
-                    }
+        if (cap.toInt() != 0) {
+            QicsDataInt _data(cap.toInt());
+            myCell->setDataValue(_data);
+        }
+        if (cap == "0") {
+            QicsDataInt _data(0);
+            myCell->setDataValue(_data);
+        }
     }
 
     // We have to call this to prevent double startEdit() calling

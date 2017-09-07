@@ -134,8 +134,8 @@ void QicsViewTreeDataModel::deleteRows(int count, int index)
             } else
                 temp[it.key()] = *it;
 
-            if (flag)
-                m_specRows = temp;
+        if (flag)
+            m_specRows = temp;
     }
 
     if (m_emitSignals)

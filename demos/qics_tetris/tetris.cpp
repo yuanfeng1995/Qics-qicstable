@@ -288,16 +288,16 @@ void QicsTetris::drawNextForm()
             tableNextForm->cellRef(i, j).setBackgroundColor(*backColor);
             tableNextForm->cellRef(i, j).setDisplayer(pFieldCellDisplay);
         }
-        // draw form
-        pArrForm = nextForm.GetArrPoints();
-        for (int i = 0; i < diameterForm; ++i) {
-            tmpPoint = &pArrForm[i];
-            row = tmpPoint->y();
-            col = tmpPoint->x();
-            tableNextForm->cellRef(row, col).setBackgroundColor(nextForm.color());
-            tableNextForm->cellRef(row, col).setDisplayer(pFigureCellDisplay);
-        }
-        pArrForm = form.GetArrPoints();
+    // draw form
+    pArrForm = nextForm.GetArrPoints();
+    for (int i = 0; i < diameterForm; ++i) {
+        tmpPoint = &pArrForm[i];
+        row = tmpPoint->y();
+        col = tmpPoint->x();
+        tableNextForm->cellRef(row, col).setBackgroundColor(nextForm.color());
+        tableNextForm->cellRef(row, col).setDisplayer(pFigureCellDisplay);
+    }
+    pArrForm = form.GetArrPoints();
 }
 
 void QicsTetris::checkOnGameOver()
@@ -490,27 +490,27 @@ void QicsTetris::setViewSettings()
                     dataModelField->item(i, j)->string().toInt() == BUSY_CELL)
                     tableField->cellRef(i, j).setDisplayer(pFigureCellDisplay);
             }
-            // set field color
-            if (backColor && *backColor != viewSettings->getFieldColor()) {
-                *backColor = viewSettings->getFieldColor();
-                for (int i = 0; i < countRowsTableField; i++)
-                    for (int j = 0; j < countColumnsTableField; j++) {
-                        if (dataModelField->item(i, j)->string().toInt() == EMPTY_CELL)
-                            tableField->cellRef(i, j).setBackgroundColor(*backColor);
-                    }
-            }
-            drawNextForm();
-            // set grid color
-            if (gridColor && *gridColor != viewSettings->getGridColor()) {
-                *gridColor = viewSettings->getGridColor();
-                QPen* pen = new QPen(gridColor->rgb());
-                tableField->setHorizontalGridLinePen(*pen);
-                tableField->setVerticalGridLinePen(*pen);
-                tableNextForm->setHorizontalGridLinePen(*pen);
-                tableNextForm->setVerticalGridLinePen(*pen);
-            }
-            tableField->setRepaintBehavior(Qics::RepaintOn);
-            tableNextForm->setRepaintBehavior(Qics::RepaintOn);
+        // set field color
+        if (backColor && *backColor != viewSettings->getFieldColor()) {
+            *backColor = viewSettings->getFieldColor();
+            for (int i = 0; i < countRowsTableField; i++)
+                for (int j = 0; j < countColumnsTableField; j++) {
+                    if (dataModelField->item(i, j)->string().toInt() == EMPTY_CELL)
+                        tableField->cellRef(i, j).setBackgroundColor(*backColor);
+                }
+        }
+        drawNextForm();
+        // set grid color
+        if (gridColor && *gridColor != viewSettings->getGridColor()) {
+            *gridColor = viewSettings->getGridColor();
+            QPen* pen = new QPen(gridColor->rgb());
+            tableField->setHorizontalGridLinePen(*pen);
+            tableField->setVerticalGridLinePen(*pen);
+            tableNextForm->setHorizontalGridLinePen(*pen);
+            tableNextForm->setVerticalGridLinePen(*pen);
+        }
+        tableField->setRepaintBehavior(Qics::RepaintOn);
+        tableNextForm->setRepaintBehavior(Qics::RepaintOn);
     }
 }
 

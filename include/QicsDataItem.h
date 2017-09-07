@@ -318,7 +318,7 @@ public:
         if ( qs == trueString()  ) { myData = true;  ok = true; }
         else
             if ( qs == falseString() ) { myData = false; ok = true; }
-            return ok;
+        return ok;
     }
 
     inline virtual double number(bool *ok = 0) const

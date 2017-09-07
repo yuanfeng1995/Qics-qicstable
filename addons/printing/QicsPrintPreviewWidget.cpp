@@ -595,18 +595,18 @@ void QicsPrintPreviewWidget::doFullUpdate(uint hint)
                     doCalculateVerticalZoom();
         }
 
-        // layout
-        if (doLayout) doLayoutPages();
+    // layout
+    if (doLayout) doLayoutPages();
 
-        // jump to active page
-        if (m_activePage && m_activePageJump)
-            ensurePageVisible(m_activePage);
+    // jump to active page
+    if (m_activePage && m_activePageJump)
+        ensurePageVisible(m_activePage);
 
-        // rulers
-        doUpdateRulers();
+    // rulers
+    doUpdateRulers();
 
-        // emit
-        emit updatePerformed(m_params);
+    // emit
+    emit updatePerformed(m_params);
 }
 
 void QicsPrintPreviewWidget::setActivePageIndex(int index)
@@ -827,45 +827,45 @@ void QicsPrintPreviewWidget::print()
                 if (!(list[i] & 1)) list.removeAt(i);
         }
 
-        // count number of copies
-        int copies = m_copies > 0 ? m_copies : m_printer->numCopies();
+    // count number of copies
+    int copies = m_copies > 0 ? m_copies : m_printer->numCopies();
 
-        int totalPages = copies * list.size();
-        if (!totalPages) return;
+    int totalPages = copies * list.size();
+    if (!totalPages) return;
 
-        // set page print order
-        PrintPageOrder order = m_printPageOrder;
-        if (m_printPageOrder == PO_PRINTER)
-            order = m_printer->pageOrder() == QPrinter::FirstPageFirst ? PO_FIRSTPAGE : PO_LASTPAGE;
+    // set page print order
+    PrintPageOrder order = m_printPageOrder;
+    if (m_printPageOrder == PO_PRINTER)
+        order = m_printer->pageOrder() == QPrinter::FirstPageFirst ? PO_FIRSTPAGE : PO_LASTPAGE;
 
-        // do printing
-        m_newPage = false;
-        m_printPageIndex = 0;
+    // do printing
+    m_newPage = false;
+    m_printPageIndex = 0;
 
-        emit printingStarted(totalPages);
+    emit printingStarted(totalPages);
 
-        if (order == PO_FIRSTPAGE && m_printCopyOrder == CO_EVERYPAGE) {
-            for (int i = 0; i < list.size(); ++i)
-                for (int j = 0; j < copies; ++j)
+    if (order == PO_FIRSTPAGE && m_printCopyOrder == CO_EVERYPAGE) {
+        for (int i = 0; i < list.size(); ++i)
+            for (int j = 0; j < copies; ++j)
+                if (!doPrintPage(list[i], p)) return;
+    }
+    else
+        if (order == PO_FIRSTPAGE && m_printCopyOrder == CO_PAGESET) {
+            for (int j = 0; j < copies; ++j)
+                for (int i = 0; i < list.size(); ++i)
                     if (!doPrintPage(list[i], p)) return;
         }
         else
-            if (order == PO_FIRSTPAGE && m_printCopyOrder == CO_PAGESET) {
-                for (int j = 0; j < copies; ++j)
-                    for (int i = 0; i < list.size(); ++i)
+            if (order == PO_LASTPAGE && m_printCopyOrder == CO_EVERYPAGE) {
+                for (int i = list.size()-1; i >= 0; --i)
+                    for (int j = 0; j < copies; ++j)
                         if (!doPrintPage(list[i], p)) return;
             }
-            else
-                if (order == PO_LASTPAGE && m_printCopyOrder == CO_EVERYPAGE) {
+            else {
+                for (int j = 0; j < copies; ++j)
                     for (int i = list.size()-1; i >= 0; --i)
-                        for (int j = 0; j < copies; ++j)
-                            if (!doPrintPage(list[i], p)) return;
-                }
-                else {
-                    for (int j = 0; j < copies; ++j)
-                        for (int i = list.size()-1; i >= 0; --i)
-                            if (!doPrintPage(list[i], p)) return;
-                }
+                        if (!doPrintPage(list[i], p)) return;
+            }
 
     emit printingFinished();
 }
