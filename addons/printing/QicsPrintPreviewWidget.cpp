@@ -801,7 +801,7 @@ void QicsPrintPreviewWidget::print()
                 list.append(i);
             break;
         }
-
+    // fall through
     case PS_ALL:
     case PS_ENABLED:
     case PS_SELECTED:

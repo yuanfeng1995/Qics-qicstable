@@ -2554,6 +2554,7 @@ void QicsScreenGrid::handleCellPropertyChange(const QicsRegion &region,
         break;
     case QicsCellStyle::ToolTipText:
         repaint = false;
+        // fall through
     case QicsCellStyle::Selected:
         repaint = false;
         recalc = false;

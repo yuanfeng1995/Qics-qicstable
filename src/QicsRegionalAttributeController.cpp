@@ -360,7 +360,7 @@ bool QicsRegionalAttributeController::setCellProperty(int row, int col, int name
                 if (cd)
                     cd->aboutToClear(0,-1,-1);
             }
-
+        // fall through
         case QicsCellStyle::Formatter:
         case QicsCellStyle::Validator:
         case QicsCellStyle::PasteValidator:
@@ -454,6 +454,7 @@ bool QicsRegionalAttributeController::clearCellProperty(int row, int col, int na
                 if (cd)
                     cd->aboutToClear(0,-1,-1);
             }
+        // fall through
         case QicsCellStyle::Font:
         case QicsCellStyle::SelectedFont:
 

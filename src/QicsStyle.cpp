@@ -92,6 +92,7 @@ void QicsStyle::setValue(int prop, const void *val)
             if (cd)
                 cd->aboutToClear(0,-1,-1);
         }
+        // fall through
     case QicsT_Pointer:
     case QicsT_QicsMouseMap:
     case QicsT_PasteValidator:
