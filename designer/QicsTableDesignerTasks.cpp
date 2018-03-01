@@ -1,6 +1,6 @@
 /*********************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2018 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of the QicsTable software.
@@ -12,6 +12,7 @@
 
 #include "QicsTableDesignerTasks.h"
 
+#include <QAction>
 #include <QFileDialog>
 #include <QTextStream>
 
