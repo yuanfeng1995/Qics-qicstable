@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2019 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of an example program for QicsTable. This example
@@ -333,8 +333,8 @@ void Consultant::about()
         "<img src=':/Resources/ics.png'>"
         "<br><h3>Integrated Computer Solutions Incorporated</h3>"
         "</td><td>"
-        "<h3>The User Interface Company</h3>"
-        "54B Middlesex Turnpike<br>Bedford, MA USA 01730<br><br>"
+        "<h3>Creating Smart Devices for a Connected World</h3>"
+        "230 Second Avenue<br>Waltham, MA USA 02451<br><br>"
         "<b>info@ics.com<br>www.ics.com</b>"
         "</td><tr><td colspan=2>"
         "<hr>"
