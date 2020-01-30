@@ -48,7 +48,7 @@ macx {
     # QMAKESPEC=macx-xcode
 }
 
-win32 {
+msvc {
     QMAKE_CXXFLAGS *= /MP
 
     contains(QMAKE_HOST.arch, x86):{
