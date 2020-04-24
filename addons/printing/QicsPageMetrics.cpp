@@ -103,7 +103,7 @@ QicsPageMetrics::QicsPageMetrics(const QString &n, double w, double h)
 QString QicsPageMetrics::paperString(int ps)
 {
     const QicsPageMetrics *pm = paperMetrics(ps);
-    if (!pm) return QString::null;
+    if (!pm) return QString();
     return QString("%1 (%2 x %3 mm)").arg(pm->name).arg(pm->mmWidth).arg(pm->mmHeight);
 }
 

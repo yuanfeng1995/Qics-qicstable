@@ -49,7 +49,11 @@ QString QicsDataQPoint::format(const char *fmt_string) const
 {
     QString str;
 
+#if QT_VERSION >= 0x050500
+    return str.asprintf(fmt_string, m_data.x(), m_data.y());
+#else
     return str.sprintf(fmt_string, m_data.x(), m_data.y());
+#endif
 }
 
 int QicsDataQPoint::compareTo(const QicsDataItem &x) const

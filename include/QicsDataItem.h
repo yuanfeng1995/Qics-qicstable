@@ -338,7 +338,11 @@ public:
     inline void setData(bool b) { myData = b;}
 
     inline virtual QString format(const char *fmt_string) const
+#if QT_VERSION >= 0x050500
+    { QString str; return str.asprintf(fmt_string, (const char *) string().toLocal8Bit() ); }
+#else
     { QString str; return str.sprintf(fmt_string, (const char *) string().toLocal8Bit() ); }
+#endif
 
     int compareTo(const QicsDataItem &x) const;
     inline void encode(QDataStream &ds) const
@@ -476,7 +480,11 @@ public:
     inline void setData(int i) { myData = i;}
 
     inline virtual QString format(const char *fmt_string) const
+#if QT_VERSION >= 0x050500
+    { QString str; return str.asprintf(fmt_string, myData); }
+#else
     { QString str; return str.sprintf(fmt_string, myData); }
+#endif
 
     int compareTo(const QicsDataItem &x) const;
     inline void encode(QDataStream &ds) const
@@ -574,7 +582,11 @@ public:
     inline void setData(long i) { myData = i;}
 
     inline virtual QString format(const char *fmt_string) const
+#if QT_VERSION >= 0x050500
+    { QString str; return str.asprintf(fmt_string, myData); }
+#else
     { QString str; return str.sprintf(fmt_string, myData); }
+#endif
 
     int compareTo(const QicsDataItem &x) const;
     inline void encode(QDataStream &ds) const
@@ -673,7 +685,11 @@ public:
     inline void setData(qlonglong i) { myData = i;}
 
     inline virtual QString format(const char *fmt_string) const
+#if QT_VERSION >= 0x050500
+    { QString str; return str.asprintf(fmt_string, myData); }
+#else
     { QString str; return str.sprintf(fmt_string, myData); }
+#endif
 
     int compareTo(const QicsDataItem &x) const;
 
@@ -774,7 +790,11 @@ public:
     inline void setData(float f) { myData = f;}
 
     inline virtual QString format(const char *fmt_string) const
+#if QT_VERSION >= 0x050500
+    { QString str; return str.asprintf(fmt_string, myData); }
+#else
     { QString str; return str.sprintf(fmt_string, myData); }
+#endif
 
     int compareTo(const QicsDataItem &x) const;
     inline void encode(QDataStream &ds) const
@@ -872,7 +892,11 @@ public:
     inline void setData(double d) { myData = d;}
 
     inline virtual QString format(const char *fmt_string) const
+#if QT_VERSION >= 0x050500
+   { QString str; return str.asprintf(fmt_string, myData); }
+#else
     { QString str; return str.sprintf(fmt_string, myData); }
+#endif
 
     int compareTo(const QicsDataItem &x) const;
     inline void encode(QDataStream &ds) const
@@ -986,7 +1010,11 @@ public:
     inline virtual const QString string() const { return myData; }
 
     inline virtual QString format(const char *fmt_string) const
+#if QT_VERSION >= 0x050500
+    { QString str; return str.asprintf(fmt_string, (const char *) myData.toLocal8Bit()); }
+#else
     { QString str; return str.sprintf(fmt_string, (const char *) myData.toLocal8Bit()); }
+#endif
 
     int compareTo(const QicsDataItem &x) const;
     inline void encode(QDataStream &ds) const
@@ -1465,7 +1493,11 @@ public:
     }
 
     inline virtual QString format(const char *fmt_string) const
+#if QT_VERSION >= 0x050500
+    { QString str; return str.asprintf(fmt_string, (const char *)myData.toString().toLocal8Bit()); }
+#else
     { QString str; return str.sprintf(fmt_string, (const char *)myData.toString().toLocal8Bit()); }
+#endif
 
     /*!
     *   Sets the value of this data item to \a v.

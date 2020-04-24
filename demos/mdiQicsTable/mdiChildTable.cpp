@@ -69,7 +69,7 @@ bool MdiChild::saveAs()
 
 bool MdiChild::saveFile(const QString &fileName)
 {
-    if (fileName != QString::null)
+    if (fileName != QString())
     {
         writeFile(fileName);
         isUntitled = false;
