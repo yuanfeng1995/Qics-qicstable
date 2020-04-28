@@ -321,6 +321,11 @@ public:
     */
     friend QICS_EXPORT bool operator!=(const QicsSelection &r1,
         const QicsSelection &r2);
+
+#if __cplusplus >= 201103L
+    QicsSelection& operator=(const QicsSelection&) = default;
+#endif
+
 protected:
     /*!
     * \internal

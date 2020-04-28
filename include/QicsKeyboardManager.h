@@ -30,7 +30,7 @@ class QicsScreenGrid;
 class QICS_EXPORT QicsKeyCombination : public QKeySequence
 {
 public:
-    QicsKeyCombination(Qt::KeyboardModifiers modifiers=0, Qt::Key key=Qt::Key_unknown)
+    QicsKeyCombination(Qt::KeyboardModifiers modifiers = Qt::NoModifier, Qt::Key key=Qt::Key_unknown)
         : QKeySequence(modifiers+key),
           myModifiers(modifiers),
           myKey(key)
