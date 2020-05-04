@@ -1,6 +1,6 @@
 /*********************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of the QicsTable software.
@@ -522,9 +522,17 @@ void QicsSorter::sort(const QVector<int> &rows_or_columns, QicsSortOrder sort_or
 
     if (!sorted) {
         if (sortMode() == Qics::QicsQuickSort)
+#if QT_VERSION < 0x050000
             qSort(_from, _to, func ? functionLessThan : delegateLessThan);
+#else
+            std::sort(_from, _to, func ? functionLessThan : delegateLessThan);
+#endif
         else
+#if QT_VERSION < 0x050000
             qStableSort(_from, _to, func ? functionLessThan : delegateLessThan);
+#else
+            std::stable_sort(_from, _to, func ? functionLessThan : delegateLessThan);
+#endif
     }
 
     flushModelToVisualMap();

@@ -1,6 +1,6 @@
 /*********************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of the QicsTable software.
@@ -4409,7 +4409,11 @@ QStringList QicsTable::uniqueKeysForColumn(int mcol, bool noEmpty) const
         set.insert(s);
     }
 
+#if QT_VERSION >= 0x051400
+    return set.values();
+#else
     return set.toList();
+#endif
 }
 
 bool QicsTable::hasHiddenRows() const

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of an example program for QicsTable. This example
@@ -233,7 +233,12 @@ void SpreadsheetTable::deleteRows()
     QicsSelectionList* list = selectionList(true);
 
     QList<int> tokill = list->rows();
+
+#if QT_VERSION >= 0x050000
+    std::sort(tokill.begin(), tokill.end());
+#else
     qSort(tokill.begin(), tokill.end());
+#endif
 
     QListIterator<int> iter(tokill);
     iter.toBack();
@@ -253,7 +258,12 @@ void SpreadsheetTable::deleteColumns()
     QicsSelectionList* list = selectionList(true);
     QList<int> toKill = list->columns();
 
+#if QT_VERSION >= 0x050000
+    std::sort(toKill.begin(), toKill.end());
+#else
     qSort(toKill.begin(), toKill.end());
+#endif
+
     QListIterator<int> iter(toKill);
     iter.toBack();
 
@@ -272,7 +282,12 @@ void SpreadsheetTable::hideRows()
     QicsSelectionList* list = selectionList(true);
     QList<int> toHide = list->rows();
 
+#if QT_VERSION >= 0x050000
+    std::sort(toHide.begin(), toHide.end());
+#else
     qSort(toHide.begin(), toHide.end());
+#endif
+
     QListIterator<int> iter(toHide);
     iter.toBack();
 
@@ -291,7 +306,12 @@ void SpreadsheetTable::hideColumns()
     QicsSelectionList* list = selectionList(true);
     QList<int> toHide = list->columns();
 
+#if QT_VERSION >= 0x050000
+    std::sort(toHide.begin(), toHide.end());
+#else
     qSort(toHide.begin(), toHide.end());
+#endif
+
     QListIterator<int> iter(toHide);
     iter.toBack();
 

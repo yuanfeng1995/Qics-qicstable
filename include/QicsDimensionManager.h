@@ -1,6 +1,6 @@
 /*********************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of the QicsTable software.
@@ -906,6 +906,11 @@ protected:
         * copy constructor
         */
         QicsDefaultDimensionSetting(const QicsDefaultDimensionSetting &);
+
+#if __cplusplus >= 201103L
+        QicsDefaultDimensionSetting& operator=(const QicsDefaultDimensionSetting &) = default;
+#endif
+
         /*!
         * sets font_height and font_width to the dimensions of \a fnt.
         */
@@ -998,6 +1003,10 @@ protected:
         */
         QicsRowHeight(const QicsRowHeight &rh);
 
+#if __cplusplus >= 201103L
+        QicsRowHeight& operator=(const QicsRowHeight &) = default;
+#endif
+
         // the mode of this height setting
         QicsDimensionMode mode;
         // height of this row in pixels
@@ -1032,6 +1041,10 @@ protected:
         * copy constructor
         */
         QicsColumnWidth(const QicsColumnWidth &cw);
+
+#if __cplusplus >= 201103L
+        QicsColumnWidth& operator=(const QicsColumnWidth &) = default;
+#endif
 
         // the mode of this width setting
         QicsDimensionMode mode;
@@ -1068,6 +1081,10 @@ protected:
         */
         QicsRepeatingRowHeight(const QicsRepeatingRowHeight &rh);
 
+#if __cplusplus >= 201103L
+        QicsRepeatingRowHeight& operator=(const QicsDimensionManager::QicsRepeatingRowHeight &) = default;
+#endif
+
         // starting row
         int row;
         // interval for this repeating row
@@ -1090,6 +1107,10 @@ protected:
         * copy constructor
         */
         QicsRepeatingColumnWidth(const QicsRepeatingColumnWidth &cw);
+
+#if __cplusplus >= 201103L
+        QicsRepeatingColumnWidth& operator=(const QicsRepeatingColumnWidth &) = default;
+#endif
 
         // starting column
         int col;
@@ -1117,6 +1138,10 @@ protected:
 
         inline QicsOverrideSetting(const QicsOverrideSetting &os)
         { myIndex = os.myIndex; myVal = os.myVal; }
+
+#if __cplusplus >= 201103L
+        QicsOverrideSetting& operator=(const QicsOverrideSetting &) = default;
+#endif
 
         inline int index() const
         { return myIndex; }

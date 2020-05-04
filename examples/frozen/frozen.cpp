@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2002-2019 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of an example program for QicsTable. This example
@@ -130,7 +130,11 @@ void Frozen::doMoveConfig()
         }
 
         // This ensures that the rows are moved in the correct order
+#if QT_VERSION >= 0x050000
+        std::sort(rows_to_move.begin(),rows_to_move.end());
+#else
         qSort(rows_to_move.begin(),rows_to_move.end());
+#endif
 
         // Now we can move the rows to the top or the bottom
         m_table->moveRows((m_moveDialog->moveToTop() ? 0 : m_table->bottomRow() + 1), rows_to_move);
@@ -164,7 +168,12 @@ void Frozen::doMoveConfig()
         }
 
         // This ensures that the columns are moved in the correct order
+#if QT_VERSION >= 0x050000
+        std::sort(cols_to_move.begin(),cols_to_move.end());
+#else
         qSort(cols_to_move.begin(),cols_to_move.end());
+#endif
+
         // Now we can move the columns to the left or the right
         m_table->moveColumns((m_moveDialog->moveToLeft() ? 0 : m_table->rightColumn() + 1), cols_to_move);
 

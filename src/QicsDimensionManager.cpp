@@ -1,6 +1,6 @@
 /*********************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of the QicsTable software.
@@ -639,21 +639,33 @@ void QicsDimensionManager::dupSetCells(const QicsCellSettingV &from,
                                   QicsCellSettingV &to)
 {
     to.resize(from.size());
+#if QT_VERSION >= 0x050000
+    std::copy(from.begin(), from.end(), to.begin());
+#else
     qCopy(from.begin(), from.end(), to.begin());
+#endif
 }
 
 void QicsDimensionManager::dupSetRows(const QicsRowSettingV &from,
                                  QicsRowSettingV &to)
 {
     to.resize(from.size());
+#if QT_VERSION >= 0x050000
+    std::copy(from.begin(), from.end(), to.begin());
+#else
     qCopy(from.begin(), from.end(), to.begin());
+#endif
 }
 
 void QicsDimensionManager::dupSetColumns(const QicsColumnSettingV &from,
                                     QicsColumnSettingV &to)
 {
     to.resize(from.size());
+#if QT_VERSION >= 0x050000
+    std::copy(from.begin(), from.end(), to.begin());
+#else
     qCopy(from.begin(), from.end(), to.begin());
+#endif
 }
 
 void QicsDimensionManager::dupRowHeights(const QicsRowHeightPV &from,
@@ -1200,7 +1212,12 @@ void QicsDimensionManager::setCellFont(QicsGridType grid_type,
                     QicsCell myCell(i,col, gridInfo());
 
                     QFontMetrics fm(myCell.font());
+
+#if QT_VERSION < 0x051400
                     int temp_fontwidth = fm.width ( gridInfo()->cellValue(i,col)->string());
+#else
+                    int temp_fontwidth = fm.horizontalAdvance(gridInfo()->cellValue(i,col)->string());
+#endif
 
                     if (new_font_width<temp_fontwidth)
                         new_font_width=temp_fontwidth;
@@ -3823,16 +3840,27 @@ void QicsDimensionManager::insertRows(int num, int start_position)
         myRowMaxHeights.insert(pos, num, 0);
     }
 
-    // Then Hide setings
+    // Then Hide settings
+#if QT_VERSION < 0x051400
     QList<int> list = myHiddenRows.toList();
     qSort(list.begin(), list.end());    // we MUST sort the list - as QSet is unsorted internally
+#else
+    QList<int> list = myHiddenRows.values();
+    std::sort(list.begin(), list.end());    // we MUST sort the list - as QSet is unsorted internally
+#endif
+
     QList<int>::iterator iter, iter_end(list.end());
 
     for (iter = list.begin(); iter != iter_end; ++iter) {
         if ( *iter >= start_position )
             *iter += num;
     }
+
+#if QT_VERSION < 0x051400
     myHiddenRows = list.toSet();
+#else
+    myHiddenRows = QSet<int>(list.begin(), list.end());
+#endif
 
     // Next, any row settings
     QicsRowSettingV::iterator iter_rs, iter_rs_end(mySetRows.end());
@@ -3916,9 +3944,16 @@ void QicsDimensionManager::insertColumns(int num, int start_position)
             setting.col += num;
     }
 
-    // Then Hide setings
+    // Then Hide settings
+
+#if QT_VERSION < 0x051400
     QList<int> list = myHiddenColumns.toList();
     qSort(list.begin(), list.end());    // we MUST sort the list - as QSet is unsorted internally
+#else
+    QList<int> list = myHiddenColumns.values();
+    std::sort(list.begin(), list.end());    // we MUST sort the list - as QSet is unsorted internally
+#endif
+
     QList<int>::iterator iter, iter_end(list.end());
 
     for (iter = list.begin(); iter != iter_end; ++iter) {
@@ -3926,7 +3961,11 @@ void QicsDimensionManager::insertColumns(int num, int start_position)
             *iter += num;
     }
 
+#if QT_VERSION < 0x051400
     myHiddenColumns = list.toSet();
+#else
+    myHiddenColumns = QSet<int>(list.begin(), list.end());
+#endif
 
     // Finally, any cell settings
     QicsCellSettingV::iterator iter_cell, iter_cell_end(mySetCells.end());
@@ -4021,7 +4060,7 @@ void QicsDimensionManager::deleteRows(int num, int start_position)
         myRowMaxHeights.erase(start_pos, end_pos);
     }
 
-    // Then Hide setings
+    // Then Hide settings
     QSet<int> tempSet(myHiddenRows);
     myHiddenRows.clear();
 
@@ -4186,7 +4225,7 @@ void QicsDimensionManager::deleteColumns(int num, int start_position)
         }
     }
 
-    // Then Hide setings
+    // Then Hide settings
     QSet<int> tempSet(myHiddenColumns);
     myHiddenColumns.clear();
     QSet<int>::const_iterator iter, iter_end(tempSet.constEnd());
@@ -5352,7 +5391,12 @@ unsigned int QicsDimensionManager::stretchRows(int start_row, int end_row, int s
                 remainder = remainder * -1;
 
             // Find the next row to add partials to
+
+#if QT_VERSION < 0x051400
             qSort(stretchable_rows);
+#else
+            std::sort(stretchable_rows.begin(), stretchable_rows.end());
+#endif
 
             for (i = 0; i < nrows; ++i)
                 if (stretchable_rows.at(i) > myLastStretchedRow) {
@@ -5466,7 +5510,11 @@ unsigned int QicsDimensionManager::stretchColumns(int start_col, int end_col, in
                 remainder = remainder * -1;
 
             // Find the next column to add partials to
+#if QT_VERSION < 0x051400
             qSort(stretchable_cols);
+#else
+            std::sort(stretchable_cols.begin(), stretchable_cols.end());
+#endif
 
             for (i = 0; i < ncols; ++i)
                 if (stretchable_cols.at(i) > myLastStretchedColumn) {

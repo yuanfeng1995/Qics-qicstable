@@ -1,6 +1,6 @@
 /*********************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of the QicsTable software.
@@ -995,7 +995,11 @@ void QicsHeaderGrid::dropAt(QDropEvent *event, const QicsICell &c)
             }
             // we sort the indices to null out the effects of out
             // of order selection
+#if QT_VERSION < 0x050000
             qSort(items);
+#else
+            std::sort(items.begin(), items.end());
+#endif
 
             if(m_type == Qics::RowHeader) {
                 if(m_haveIdropAfter)

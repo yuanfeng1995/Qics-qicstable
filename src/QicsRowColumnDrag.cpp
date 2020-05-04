@@ -1,6 +1,6 @@
 /*********************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of the QicsTable software.
@@ -90,7 +90,11 @@ QicsRowColumnDrag *QicsRowColumnDrag::getDragObject(QicsGridInfo *gi, Qics::Qics
         return 0;
     }
 
+#if QT_VERSION < 0x050000
     qSort(ret->items.begin(), ret->items.end());
+#else
+    std::sort(ret->items.begin(), ret->items.end());
+#endif
 
     if (type == RowIndex) {
         for (int i = 0; i < ret->items.size(); ++i)
