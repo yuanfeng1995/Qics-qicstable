@@ -995,7 +995,7 @@ void QicsHeaderGrid::dropAt(QDropEvent *event, const QicsICell &c)
             }
             // we sort the indices to null out the effects of out
             // of order selection
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
             qSort(items);
 #else
             std::sort(items.begin(), items.end());

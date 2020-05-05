@@ -309,7 +309,7 @@ void QicsHTMLExport::doExportCell(const QicsCell &cell)
     // widget displayer
     QicsWidgetCellDisplay *cw = dynamic_cast<QicsWidgetCellDisplay*>(cell.displayer());
     if (cw && cw->widget() && m_opts.widgets) {
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         const QPixmap &pm = QPixmap::grabWidget(cw->widget());
 #else
         const QPixmap &pm = cw->widget()->grab();

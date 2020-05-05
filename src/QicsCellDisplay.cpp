@@ -16,7 +16,7 @@
 #include <QPainter>
 #include <QApplication>
 #include <QStyleOptionHeader>
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #include <QWindowsStyle>
 #include <QPlastiqueStyle>
 #else
@@ -52,7 +52,7 @@ QicsCellDisplay::QicsCellDisplay()
     myColumn = new QicsColumn(-1, 0, false, 0);
     myGrid = new QicsMainGrid(0, 0, false);
     myIsEditing = false;
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     myStyle = new QPlastiqueStyle();
 #else
     myStyle = new QCommonStyle();
@@ -118,7 +118,7 @@ void QicsCellDisplay::drawBackground(QicsGridInfo *info, int, int,
 
             QStyle* style = QApplication::style();
 
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
             if (qobject_cast<QWindowsStyle*>(style))
 #else
             if (qobject_cast<QCommonStyle*>(style))

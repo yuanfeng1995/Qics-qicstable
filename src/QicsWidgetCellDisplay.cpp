@@ -83,7 +83,7 @@ void QicsWidgetCellDisplay::displayCell(QicsGrid *grid, int row, int col,
     if (d->for_printer) {
         // We are trying to print, so grab a pixmap of the widget
         // and draw it to the printer.
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         QPixmap pix = QPixmap::grabWidget(m_widget);
 #else
         QPixmap pix = m_widget->grab();

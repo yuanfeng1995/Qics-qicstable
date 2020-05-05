@@ -522,13 +522,13 @@ void QicsSorter::sort(const QVector<int> &rows_or_columns, QicsSortOrder sort_or
 
     if (!sorted) {
         if (sortMode() == Qics::QicsQuickSort)
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
             qSort(_from, _to, func ? functionLessThan : delegateLessThan);
 #else
             std::sort(_from, _to, func ? functionLessThan : delegateLessThan);
 #endif
         else
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
             qStableSort(_from, _to, func ? functionLessThan : delegateLessThan);
 #else
             std::stable_sort(_from, _to, func ? functionLessThan : delegateLessThan);

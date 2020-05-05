@@ -61,7 +61,7 @@ void QicsRadioCellDisplay::displayCell(QicsGrid *grid, int row, int col,
         if (rb) rb->setChecked(true);
     }
 
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QPixmap pix = QPixmap::grabWidget(widget);
 #else
     QPixmap pix = widget->grab();

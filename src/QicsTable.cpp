@@ -4409,7 +4409,7 @@ QStringList QicsTable::uniqueKeysForColumn(int mcol, bool noEmpty) const
         set.insert(s);
     }
 
-#if QT_VERSION >= 0x051400
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return set.values();
 #else
     return set.toList();

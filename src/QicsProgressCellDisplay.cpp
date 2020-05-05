@@ -68,7 +68,7 @@ void QicsProgressCellDisplay::displayCell(QicsGrid *grid, int row, int col,
     pb->setFont(myCell->font());
     pb->setPalette(myCell->palette());
 
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QPixmap pix = QPixmap::grabWidget(pb);
 #else
     QPixmap pix = pb->grab();

@@ -43,7 +43,7 @@ QicsComboTabCellDisplay::QicsComboTabCellDisplay(QWidget *parent)
 
     QTableWidget *tw = new QTableWidget(parent);
 
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     tw->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
 #else
     tw->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);

@@ -177,7 +177,7 @@ bool QicsScreenGrid::event(QEvent *event)
                         continue;
                     }
 
-#if QT_VERSION < 0x051400
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
                     fontWidth = fontMetrics.width( text.at(ii));
 #else
                     fontWidth = fontMetrics.horizontalAdvance(text.at(ii));

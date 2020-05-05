@@ -639,7 +639,7 @@ void QicsDimensionManager::dupSetCells(const QicsCellSettingV &from,
                                   QicsCellSettingV &to)
 {
     to.resize(from.size());
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     std::copy(from.begin(), from.end(), to.begin());
 #else
     qCopy(from.begin(), from.end(), to.begin());
@@ -650,7 +650,7 @@ void QicsDimensionManager::dupSetRows(const QicsRowSettingV &from,
                                  QicsRowSettingV &to)
 {
     to.resize(from.size());
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     std::copy(from.begin(), from.end(), to.begin());
 #else
     qCopy(from.begin(), from.end(), to.begin());
@@ -661,7 +661,7 @@ void QicsDimensionManager::dupSetColumns(const QicsColumnSettingV &from,
                                     QicsColumnSettingV &to)
 {
     to.resize(from.size());
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     std::copy(from.begin(), from.end(), to.begin());
 #else
     qCopy(from.begin(), from.end(), to.begin());
@@ -1213,7 +1213,7 @@ void QicsDimensionManager::setCellFont(QicsGridType grid_type,
 
                     QFontMetrics fm(myCell.font());
 
-#if QT_VERSION < 0x051400
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
                     int temp_fontwidth = fm.width ( gridInfo()->cellValue(i,col)->string());
 #else
                     int temp_fontwidth = fm.horizontalAdvance(gridInfo()->cellValue(i,col)->string());
@@ -3841,7 +3841,7 @@ void QicsDimensionManager::insertRows(int num, int start_position)
     }
 
     // Then Hide settings
-#if QT_VERSION < 0x051400
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     QList<int> list = myHiddenRows.toList();
     qSort(list.begin(), list.end());    // we MUST sort the list - as QSet is unsorted internally
 #else
@@ -3856,7 +3856,7 @@ void QicsDimensionManager::insertRows(int num, int start_position)
             *iter += num;
     }
 
-#if QT_VERSION < 0x051400
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     myHiddenRows = list.toSet();
 #else
     myHiddenRows = QSet<int>(list.begin(), list.end());
@@ -3946,7 +3946,7 @@ void QicsDimensionManager::insertColumns(int num, int start_position)
 
     // Then Hide settings
 
-#if QT_VERSION < 0x051400
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     QList<int> list = myHiddenColumns.toList();
     qSort(list.begin(), list.end());    // we MUST sort the list - as QSet is unsorted internally
 #else
@@ -3961,7 +3961,7 @@ void QicsDimensionManager::insertColumns(int num, int start_position)
             *iter += num;
     }
 
-#if QT_VERSION < 0x051400
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     myHiddenColumns = list.toSet();
 #else
     myHiddenColumns = QSet<int>(list.begin(), list.end());
@@ -5392,7 +5392,7 @@ unsigned int QicsDimensionManager::stretchRows(int start_row, int end_row, int s
 
             // Find the next row to add partials to
 
-#if QT_VERSION < 0x051400
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
             qSort(stretchable_rows);
 #else
             std::sort(stretchable_rows.begin(), stretchable_rows.end());
@@ -5510,7 +5510,7 @@ unsigned int QicsDimensionManager::stretchColumns(int start_col, int end_col, in
                 remainder = remainder * -1;
 
             // Find the next column to add partials to
-#if QT_VERSION < 0x051400
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
             qSort(stretchable_cols);
 #else
             std::sort(stretchable_cols.begin(), stretchable_cols.end());

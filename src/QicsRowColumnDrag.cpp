@@ -90,7 +90,7 @@ QicsRowColumnDrag *QicsRowColumnDrag::getDragObject(QicsGridInfo *gi, Qics::Qics
         return 0;
     }
 
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     qSort(ret->items.begin(), ret->items.end());
 #else
     std::sort(ret->items.begin(), ret->items.end());
