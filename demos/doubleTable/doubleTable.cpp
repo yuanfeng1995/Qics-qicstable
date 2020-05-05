@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of an example program for QicsTable. This example
@@ -12,7 +12,9 @@
 #include <QApplication>
 #include <QMenuBar>
 #include <QTimer>
-
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+#include <QRandomGenerator>
+#endif
 #include <QicsColumnHeader.h>
 #include <QicsCell.h>
 #include <QicsRowHeader.h>
@@ -58,7 +60,9 @@ Tester::Tester(DoubleTable* table1, DoubleTable* table2, QicsDataModel* dataMode
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(changeItems()));
     m_timer->start(1000);
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
     qsrand(QDateTime::currentDateTime().toTime_t());
+#endif
 }
 
 Tester::~Tester()
@@ -67,31 +71,49 @@ Tester::~Tester()
 
 void Tester::changeItems()
 {
-    int lenght;
+    int length;
     QString str;
     char letter;
 
     for (int i = 0; i < COUNT_ROWS; ++i)
         for (int j = 0; j < COUNT_COLS; ++j) {
-            switch (rand() % 3 + 1)
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+            switch (qrand() % 3 + 1)
+#else
+            switch (QRandomGenerator::global()->generate() % 3 + 1)
+#endif
             {
             case 2:
-                m_dataModel->setItem(i, j, QicsDataFloat(static_cast <float> (rand() % 100) / ((rand() % 10) + 3.0f)));
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+                m_dataModel->setItem(i, j, QicsDataFloat(static_cast <float> (qrand() % 100) / ((rand() % 10) + 3.0f)));
+#else
+                m_dataModel->setItem(i, j, QicsDataFloat(static_cast <float> (QRandomGenerator::global()->generate() % 100) / ((rand() % 10) + 3.0f)));
+#endif
                 break;
             case 3:
-                lenght = rand() % 7 + 1;
-                for (int k = 0; k < lenght; ++k) {
-                    letter = rand() % 25 + 65;
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+                length = qrand() % 7 + 1;
+#else
+                length = QRandomGenerator::global()->generate() % 7 + 1;
+#endif
+                for (int k = 0; k < length; ++k) {
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+                    letter = qrand() % 25 + 65;
+#else
+                    letter = QRandomGenerator::global()->generate() % 25 + 65;
+#endif
                     str += QString(letter);
                 }
                 m_dataModel->setItem(i, j, QicsDataString(str));
                 str = QString();
                 break;
             default:
-                m_dataModel->setItem(i, j, QicsDataInt(rand() % 100));
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+                m_dataModel->setItem(i, j, QicsDataInt(qrand() % 100));
+#else
+                m_dataModel->setItem(i, j, QicsDataInt(QRandomGenerator::global()->generate() % 100));
+#endif
                 break;
             }
         }
 }
-
-

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of an example program for QicsTable. This example
@@ -33,7 +33,9 @@ QicsTetris::QicsTetris(QWidget* parent)
 {
     setWindowTitle(tr("Tetris Game Demo"));
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
     qsrand(QDateTime::currentDateTime().toTime_t());
+#endif
     initComponents();
     setDisposition();
     connectSlots();
@@ -568,5 +570,3 @@ void QicsTetris::timeout()
 {
     m_eventLoop.quit();
 }
-
-

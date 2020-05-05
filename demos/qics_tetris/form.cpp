@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2002-2014 Integrated Computer Solutions, Inc.
+** Copyright (C) 2002-2020 Integrated Computer Solutions, Inc.
 ** All rights reserved.
 **
 ** This file is part of an example program for QicsTable. This example
@@ -11,6 +11,9 @@
 #include "form.h"
 
 #include <QicsDataModel.h>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+#include <QRandomGenerator>
+#endif
 #include "tetris.h"
 
 
@@ -116,7 +119,11 @@ int Form::maxY() const
 // public functions
 void Form::setRandomShape()
 {
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
     setShape(Shape(qrand() % 7 + 1));
+#else
+    setShape(Shape(QRandomGenerator::global()->generate() % 7 + 1));
+#endif
 }
 
 void Form::firstLocate()
@@ -258,12 +265,16 @@ void Form::setRandomColor(QColor* backColor)
 {
     int r, g, b;
     do {
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
         r = qrand() % 256;
         g = qrand() % 256;
         b = qrand() % 256;
+#else
+        r = QRandomGenerator::global()->generate() % 256;
+        g = QRandomGenerator::global()->generate() % 256;
+        b = QRandomGenerator::global()->generate() % 256;
+#endif
         m_colorForm.setRgb(r, g, b);
     }
     while (m_colorForm == *backColor);
 }
-
-
