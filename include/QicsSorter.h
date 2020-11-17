@@ -237,7 +237,9 @@ private:
     QSet<int> m_hidden;
 
     /*! reverse mapping from physical order to visual order */
-    QMap<int, int> m_modelToVisualMap;
+    QHash<int, int> m_modelToVisualMap;
+    QHash<int, int> m_visualToModelMap;
+
 
     QMap<int, QicsAbstractSorterDelegate *> m_sorterDelegates;
     QicsAbstractSorterDelegate *m_defaultSorterDelegate;

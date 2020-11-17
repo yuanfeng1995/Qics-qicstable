@@ -432,10 +432,12 @@ void QicsSorter::fillModelToVisualMap()
 {
     const int size = m_order.size();
     m_modelToVisualMap.clear();
+    m_visualToModelMap.clear();
     int index = 0;
     for(int i = 0; i < size; ++i) {
         if (!m_hidden.contains(m_order.at(i))) {
             m_modelToVisualMap.insert(m_order.at(i), index);
+            m_visualToModelMap.insert(index, m_order.at(i));
             ++index;
         }
     }
@@ -444,6 +446,7 @@ void QicsSorter::fillModelToVisualMap()
 void QicsSorter::flushModelToVisualMap()
 {
     m_modelToVisualMap.clear();
+    m_visualToModelMap.clear();
 }
 
 int QicsSorter::modelToVisual(int x)
@@ -459,7 +462,7 @@ int QicsSorter::visualToModel(int x)
     if(m_modelToVisualMap.isEmpty())
         fillModelToVisualMap();
 
-    const int model = m_modelToVisualMap.key(x, -1);
+    const int model = m_visualToModelMap.value(x, -1);
     return model;
 }
 
@@ -675,10 +678,12 @@ void QicsSorter::configureFromDomXml(const QDomElement& e)
 
     QStringList mapList = e.attribute("map").split(",");
     m_modelToVisualMap.clear();
+    m_visualToModelMap.clear();
     int index = 0;
     foreach(const QString &str, mapList)
         if(!str.isEmpty()) {
             m_modelToVisualMap.insert(index, str.toInt());
+            m_visualToModelMap.insert(str.toInt(), index);
             ++index;
         }
 }
