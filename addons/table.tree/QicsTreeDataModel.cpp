@@ -53,8 +53,10 @@ void QicsViewTreeDataModel::finalizeSpecialInsertion()
 {
     m_delayInsertSignals = false;
 
-    emit prepareForRowChanges(sr_count, sr_start);
-    emit rowsInserted(sr_count, sr_start);
+    if (sr_count > 0) {
+        emit prepareForRowChanges(sr_count, sr_start);
+        emit rowsInserted(sr_count, sr_start);
+    }
 
     for (int i = sr_start; sr_count; i++, sr_count--) {
         QicsSpecialRowData *data = specialRowData(i);

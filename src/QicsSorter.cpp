@@ -273,7 +273,7 @@ void QicsSorter::insertElements(int how_many, int start)
 
     const int cur_size = m_order.size();
 
-    Q_ASSERT(start >= 0 && start < cur_size);
+//    Q_ASSERT(start >= 0 && start < cur_size);
     if ((start < 0) || (start >= cur_size))
         return;
 
