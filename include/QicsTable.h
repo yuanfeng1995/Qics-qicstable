@@ -4462,7 +4462,7 @@ public slots:
     * Selects all the cells in the main grid.
     * \since 2.2
     */
-    void selectAll();
+    virtual void selectAll();
 
     /*!
     * Deletes data from selected cells.

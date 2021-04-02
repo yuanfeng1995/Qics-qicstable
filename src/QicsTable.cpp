@@ -3249,8 +3249,8 @@ void QicsTable::addSelection(QicsSelection &selection)
 
 void QicsTable::selectAll()
 {
-    gridInfo().reportSelection(Qics::SelectionBegin, 0, 0, QicsLAST_ROW, QicsLAST_COLUMN);
-    gridInfo().reportSelection(Qics::SelectionEnd, 0, 0, QicsLAST_ROW, QicsLAST_COLUMN);
+    gridInfo().reportSelection(Qics::SelectionBegin, 0, 0, dataModel()->numRows(), dataModel()->numColumns());
+    gridInfo().reportSelection(Qics::SelectionEnd, 0, 0, dataModel()->numRows(), dataModel()->numColumns());
 }
 
 void QicsTable::deleteSelected()

@@ -810,6 +810,12 @@ public slots:
     */
     inline void collapseTree() { doExpandTree(false); }
 
+    /*!
+    * Selects all the cells in the main grid.
+    * \since 2.?
+    */
+    virtual void selectAll();
+
 protected slots:
     /*!
     * Performs default actions when the mouse is double clicked on header.

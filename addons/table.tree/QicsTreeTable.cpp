@@ -240,6 +240,12 @@ void QicsTreeTable::removeSpecialRows()
     }
 }
 
+void QicsTreeTable::selectAll()
+{
+    gridInfo().reportSelection(Qics::SelectionBegin, 0, 0, viewModel()->numRows(), viewModel()->numColumns());
+    gridInfo().reportSelection(Qics::SelectionEnd, 0, 0, viewModel()->numRows(), viewModel()->numColumns());
+}
+
 void QicsTreeTable::onClicked(int row,int col,int button,const QPoint &p)
 {
     if (m_expandPolicy == DisplayerDesides && m_groupDisplay) {

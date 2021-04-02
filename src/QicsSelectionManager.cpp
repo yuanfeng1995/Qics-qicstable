@@ -485,11 +485,6 @@ void QicsSelectionManager::processSelectionEvent(QicsSelectionType stype,
     {
     case SelectSingleRow:
     case SelectMultipleRow: {
-            // If the user clicked on the column header, we don't allow that.
-
-            if ((begin_row == 0) && (end_row == Qics::QicsLAST_ROW))
-                return;
-
             begin_col = 0;
             end_col = Qics::QicsLAST_COLUMN;
             break;

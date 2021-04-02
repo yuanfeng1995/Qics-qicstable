@@ -818,6 +818,12 @@ void QicsHeaderGrid::reportSelection(int row, int col, Qics::QicsSelectionType s
             anchor_index, 0, end_index, Qics::QicsLAST_COLUMN);
     }
     else {
+        // If the user clicked on the column header, we don't allow that.
+
+        if (selectionManager().selectionPolicy() == QicsSelectionPolicy::SelectSingleRow
+                || selectionManager().selectionPolicy() == QicsSelectionPolicy::SelectMultipleRow)
+            return;
+
         selectionManager().processSelectionEvent(stype,
             0, anchor_index, Qics::QicsLAST_ROW, end_index);
     }
