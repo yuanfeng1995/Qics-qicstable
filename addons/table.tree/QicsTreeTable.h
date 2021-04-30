@@ -633,17 +633,18 @@ protected:
         int		row;
         QString	content;
         int		group;
+        const QicsDataItem *dataItem = nullptr;
     };
 
 
     struct GroupItem
     {
-        void add(int _row, const QString& _content)
+        void add(int _row, const QicsDataItem *_content)
         {
             content[_content].append(_row);
         }
 
-        QMap<QString, QList<int> > content;
+        QMap<const QicsDataItem *, QList<int> > content;
     };
 
 signals:

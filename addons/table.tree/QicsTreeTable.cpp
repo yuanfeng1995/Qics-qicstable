@@ -483,6 +483,7 @@ void QicsTreeTable::doGroupTable()
             for (int k = 0; k < m_groups.size(); ++k) {
                 s_item = model->itemString(i, (group=m_groups.at(k)));
                 s_id += QString("%1.%2.").arg(group).arg(qicsCryptData(s_item.toLocal8Bit()).constData());
+                auto dataItem = model->item(i, group);
 
                 if ( m_treeMode == Tree ) {
                     if (!map.contains(s_id)) {
@@ -492,6 +493,7 @@ void QicsTreeTable::doGroupTable()
                         wr = map.value(s_id);
                     wr->content = s_item;
                     wr->group = group;
+                    wr->dataItem = dataItem;
                 } else {
                     if ( k )
                         label +=QString(" => %1").arg(s_item);
@@ -568,7 +570,7 @@ void QicsTreeTable::doConvertTree(TreeItem *ti, QicsViewTreeDataModel* model, QV
         ord->append(sr_index);
         m_rowGroupMap[sr_index] = group;
 
-        m_groupData[ti->group].add(sr_index, ti->content);
+        m_groupData[ti->group].add(sr_index, ti->dataItem);
         group->setHeaderIndex(sr_index);
         group->setColumnIndex(ti->group);
         group->setLevel(deep);
@@ -876,14 +878,13 @@ void QicsTreeTable::doFilterTable()
         rowRef(i).show();
 
     if (!m_groups.size()) {
-//        for (QMap<int, QicsAbstractFilterDelegate*>::const_iterator it = m_filters.constBegin(); it != m_filters.constEnd(); ++it) {
         for (QMap<int, QPointer<QicsAbstractFilterDelegate> >::const_iterator it = m_filters.constBegin(); it != m_filters.constEnd(); ++it) {
             QicsTable::setRowFilter(it.key(), it.value());
         }
         return;
     }
 
-    QMap<QString, QList<int> >::const_iterator it;
+    QMap<const QicsDataItem *, QList<int> >::const_iterator it;
     QList<int> lr;
 
     // iterate over grouped columns to build m_filteredRows
@@ -896,9 +897,8 @@ void QicsTreeTable::doFilterTable()
         if (!lf)
             continue;
 
-        const QMap<QString, QList<int> > data = m_groupData.value(group).content;//#90025
-        for (it = data.constBegin(); it != data.constEnd(); ++it) {
-            if (!lf->match(it.key(), -1, -1)) {
+        for (it = m_groupData.value(group).content.begin(); it != m_groupData.value(group).content.end(); ++it) {
+            if (!lf->match(it.key()->string(), -1, -1)) {
                 // get list of special rows
                 lr = it.value();
 
@@ -930,8 +930,7 @@ void QicsTreeTable::doFilterTable()
     dimensionManager()->setEmitSignals(old_sig);
 
     // restore tree state - reexpand top level items
-    const QMap<QString, QList<int> > data = m_groupData.value(m_groups.value(0)).content;//#90025
-    for (it = data.constBegin(); it != data.constEnd(); ++it) {
+    for (it = m_groupData.value(m_groups.value(0)).content.constBegin(); it != m_groupData.value(m_groups.value(0)).content.constEnd(); ++it) {
         // get list of special rows
         lr = it.value();
         for (int j = 0; j < lr.size(); ++j) {
@@ -963,7 +962,6 @@ bool QicsTreeTable::doFilterRowCheck(QicsExpandableStaticRowData *erow)
                 filter = false;
         } else {
             bool pass = true;
-//            for (QMap<int, QicsAbstractFilterDelegate*>::iterator it = m_filters.begin(); it != m_filters.end(); ++it) {
             for (QMap<int, QPointer<QicsAbstractFilterDelegate> >::iterator it = m_filters.begin(); it != m_filters.end(); ++it) {
                 if (!it.value())
                     continue;
@@ -1052,9 +1050,9 @@ void QicsTreeTable::doSortTable()
 
     // build list for the 1st group
     GroupItem &gi = m_groupData[m_groups.first()];
-    QMap<QString, QList<int> >::const_iterator it;
+    QMap<const QicsDataItem *, QList<int> >::const_iterator it;
     QVector<int> list;
-    for (it = gi.content.begin(); it != gi.content.end(); ++it)
+    for (it = gi.content.constBegin(); it != gi.content.constEnd(); ++it)
         list.append(it.value().first());	// only 1 list item per key in 1st group
 
     doProcessSort(list, v, 0);
@@ -1063,7 +1061,7 @@ void QicsTreeTable::doSortTable()
 
     // sort leaf items from the last group
     GroupItem &gi1 = m_groupData[m_groups.last()];
-    for (it = gi1.content.begin(); it != gi1.content.end(); ++it) {
+    for (it = gi1.content.constBegin(); it != gi1.content.constEnd(); ++it) {
         for (int j = 0; j < it.value().count(); j++) {
             QicsExpandableStaticRowData *erow = qobject_cast<QicsExpandableStaticRowData*>(specialRowData(it.value().at(j)));
             if (!erow || erow->m_list.isEmpty()) continue;
@@ -1090,11 +1088,11 @@ void QicsTreeTable::doProcessSort(QVector<int> l, QVector<int>& v, int deep)
             Perhaps we should be able to use own sorter here?
             */
             GroupItem &gi = m_groupData[group];
-            QMap<QString, QList<int> >::const_iterator it;
-            QMap<QString, int> map;
+            QMap<const QicsDataItem *, QList<int> >::const_iterator it;
+            QHash<const QicsDataItem *, int> map;
             for (int i = 0; i < l.count()-(!!deep); ++i) {            // -1 because skipping summary row
                 int idx = l[i];
-                for (it = gi.content.begin(); it != gi.content.end(); ++it)
+                for (it = gi.content.constBegin(); it != gi.content.constEnd(); ++it)
                     if ((*it).contains(idx)) {
                         map[it.key()] = idx;
                         break;
@@ -1104,15 +1102,18 @@ void QicsTreeTable::doProcessSort(QVector<int> l, QVector<int>& v, int deep)
             // we have to remember the last item (as it is the summary row)
             int last = l.last();
 
-            // QMap holds items in ascending order - so we're just iterating here
             l.clear();
-            QMap<QString, int>::const_iterator it1;
-            if (m_sortOrder == Qics::Ascending) {
-                for (it1 = map.begin(); it1 != map.end(); ++it1)
-                    l.append(*it1);
-            } else {
-                for (it1 = map.begin(); it1 != map.end(); ++it1)
-                    l.prepend(*it1);
+
+            QList<const QicsDataItem *> keys = map.keys();
+            std::sort(keys.begin(), keys.end(), [&](const QicsDataItem *left, const QicsDataItem *right) {
+                if (m_sortOrder == Qics::Ascending) {
+                    return left->compareTo(*right) < 0;
+                }
+                return left->compareTo(*right) > 0;
+            });
+
+            for (int i = 0; i < keys.count(); ++i) {
+                l.append(map.value(keys.at(i)));
             }
 
             // and append the summary row as well
