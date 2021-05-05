@@ -246,6 +246,16 @@ public:
         Flat,
         Flat_No_Details
     };
+
+    /*!
+    * Enum denotes policy of sorting and filtering tree on cell value changed.
+    * \sa setSortFilterPolicy(), sortFilterPolicy()
+    */
+    enum QicsSortFilterPolicy {
+        SortFilterOnCellValueChanged,
+        DoNotSortFilterOnCellValueChanged
+    };
+
     /*!
     *	Constructs a QicsTreeTable widget that will display data contained in \a model,
     *  or, an empty table if \a model is 0.
@@ -417,6 +427,20 @@ public:
     */
     inline QicsExpandingPolicy expandPolicy(void) const
     { return m_expandPolicy; }
+
+    /*!
+    *	Sets tree sort and filter policy to \a policy.
+    *  \sa sortFilterPolicy()
+    */
+    inline void setSortFilterPolicy(QicsSortFilterPolicy policy)
+    { m_sortFilterPolicy = policy; }
+
+    /*!
+    *	Returns current tree sort and filter policy.
+    *  \sa setSortFilterPolicy()
+    */
+    inline QicsSortFilterPolicy sortFilterPolicy() const
+    { return m_sortFilterPolicy; }
 
     /*!
     * Returns list of column indexes in the current grouping order.
@@ -987,6 +1011,7 @@ protected:
     QicsTreeMode m_treeMode;
 
     QicsExpandingPolicy m_expandPolicy;
+    QicsSortFilterPolicy m_sortFilterPolicy;
 
     QStringList	m_tmp;
 

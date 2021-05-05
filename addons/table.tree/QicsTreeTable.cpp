@@ -115,6 +115,7 @@ void QicsTreeTable::doInit(QicsDataModel *model, bool useHeader)
     m_treeInHeader = useHeader;
     m_groupColsShown = false;
     m_expandPolicy = DisplayerDesides;
+    m_sortFilterPolicy = SortFilterOnCellValueChanged;
     m_treeMode = Tree;
 
     m_topGroup = new QicsGroupInfo(this);
@@ -661,8 +662,11 @@ void QicsTreeTable::onCellValueChanged(int row, int col)
         groupColumns(tmp);
     } else {
         setRepaintBehavior(Qics::RepaintOff);
-        doFilterTable();
-        doSortTable();
+
+        if (sortFilterPolicy() == QicsTreeTable::SortFilterOnCellValueChanged) {
+            doFilterTable();
+            doSortTable();
+        }
 
         // here we should handle summarizing...
         if (m_summarizer)
