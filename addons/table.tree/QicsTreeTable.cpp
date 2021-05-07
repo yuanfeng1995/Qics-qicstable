@@ -1268,4 +1268,30 @@ void QicsTreeTable::removeSummarizer()
     m_summarizer = 0;
 }
 
+QicsRegion QicsTreeTable::currentViewport() const
+{
+    if (viewModel()) {
+        int endRow, endCol;
 
+        QicsRegion vp = viewport();
+
+        int lastRow = viewModel()->lastRow();
+        int lastCol = viewModel()->lastColumn();
+
+        if (vp.endRow() > lastRow)
+            endRow = lastRow;
+        else
+            endRow = vp.endRow();
+
+        if (vp.endColumn() > lastCol)
+            endCol = lastCol;
+        else
+            endCol = vp.endColumn();
+
+        return QicsRegion(vp.startRow(), vp.startColumn(),
+            endRow, endCol);
+    }
+    else
+        // return full viewport if no data model
+        return viewport();
+}

@@ -1023,6 +1023,10 @@ protected:
 private:
     friend class QicsTreeHeaderGrid;
     friend class QicsGroupCellDisplay;
+
+    // QicsTable interface
+public:
+    QicsRegion currentViewport() const;
 };
 
 #endif //QICSTREETABLE_H
