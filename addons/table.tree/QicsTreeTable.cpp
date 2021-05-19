@@ -368,8 +368,12 @@ void QicsTreeTable::groupColumns(const QList<int> &columns)
 
     for (int i = 0; i < m_groups.count(); ++i) {
         emit groupAdded(m_groups.at(i));
-        if (!m_groupColsShown)
-            columnRef(gridInfo().visualColumnIndex(m_groups.at(i))).hide();
+        if (!m_groupColsShown) {
+//            columnRef(gridInfo().visualColumnIndex(m_groups.at(i))).hide();
+            QicsColumn * c  = column(m_groups.at(i));
+            c->hide();
+            delete c;
+        }
     }
 
     doGroupTable();
@@ -448,7 +452,10 @@ void QicsTreeTable::doUngroupTable()
 {
     for (int i = m_groups.count()-1; i >= 0; --i) {
         int c = m_groups[i];
-        columnRef(gridInfo().visualColumnIndex(c)).show();
+//        columnRef(gridInfo().visualColumnIndex(c)).show();
+        QicsColumn * ic  = column(c);
+        ic->show();
+        delete ic;
         m_groups.removeAll(c);
         emit groupRemoved(c);
     }
@@ -600,6 +607,7 @@ void QicsTreeTable::doConvertTree(TreeItem *ti, QicsViewTreeDataModel* model, QV
             group->addRow(ti_c->row);
         }
     }
+
 
     if (erow) {
         int i = model->numRows();
